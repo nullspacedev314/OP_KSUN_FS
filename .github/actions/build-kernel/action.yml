@@ -796,7 +796,7 @@ runs:
           if [[ "$url" == *"github.com"* ]]; then
               download_url="${url%.git}/archive/refs/heads/${branch}.tar.gz"
           elif [[ "$url" == *"gitlab.com"* ]]; then
-              download_url="${url%.git}/-/archive/${branch}/susfs4ksu-${branch}.tar.gz"
+              download_url="https://gitlab.com/simonpunk/susfs4ksu/-/archive/${branch}/susfs4ksu-${branch}.tar.gz"
           else
               echo "::error::Unsupported host: $url"
               return 1
