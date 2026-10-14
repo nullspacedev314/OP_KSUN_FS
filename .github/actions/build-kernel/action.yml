@@ -796,7 +796,7 @@ runs:
           if [[ "$url" == *"github.com"* ]]; then
               download_url="${url%.git}/archive/refs/heads/${branch}.tar.gz"
           elif [[ "$url" == *"gitlab.com"* ]]; then
-              download_url="https://gitlab.com/simonpunk/susfs4ksu/-/archive/${branch}/susfs4ksu-${branch}.tar.gz"
+              download_url="https://gitlab.com/simonpunk/susfs4ksu/-/archive/be7b7ef49a1e1b189c3abf00eacaa7ebdb4168c1/susfs4ksu-be7b7ef49a1e1b189c3abf00eacaa7ebdb4168c1.tar.gz"
           else
               echo "::error::Unsupported host: $url"
               return 1
@@ -809,7 +809,7 @@ runs:
               echo $shm_path
               if aria2c -x16 -s16 -j16 -k1M --retry-wait=2 --max-tries=5 -d "/dev/shm" -o "$archive_name" --allow-overwrite=true "${aria2_headers[@]}" $aria_log_flags "$download_url"; then
                   mkdir -p "$repo_name"
-                  if tar -I "pigz -p $nproc -b 256" -x --record-size=1M -f "$shm_path" -C "$repo_name" --strip-components=1 --no-same-owner; then
+                  if tar -v -x --record-size=1M -f "$shm_path" -C "$repo_name" --strip-components=1 --no-same-owner; then
                       echo "✅ Success: $repo_name synced"
                       rm -f "$shm_path"
                       return 0
